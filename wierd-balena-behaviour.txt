@@ -1,0 +1,209 @@
+ssh orp20@balena.bath.ac.uk
+This is a private system.  If you are not authorised to use
+this service, disconnect now.  Any unauthorised attempts to 
+use this service will be prosecuted under the Computer 
+Misuse Act 1990
+
+orp20@balena.bath.ac.uk's password: 
+Last login: Thu Sep 27 10:06:24 2018 from 138-38-185-107.eduroam.bath.ac.uk
+  ______        ___       __       _______  __   __       ___      
+ |   _  \      /   \     |  |     |   ____||  \ |  |     /   \     
+ |  |_)  |    /  ^  \    |  |     |  |__   |   \|  |    /  ^  \    
+ |   _  <    /  /_\  \   |  |     |   __|  |  . \  |   /  /_\  \   
+ |  |_)  |  /  _____  \  |  |----.|  |____ |  |\   |  /  _____  \  
+ |______/  /__/     \__\ |_______||_______||__| \__| /__/     \__\ 
+ 
+
+Welcome to the University of Bath's High Performance Computing Service.
+Documentation on the use of this system is available on the wiki at
+https://wiki.bath.ac.uk/display/BalenaHPC 
+
+-------------------------------------------------------------------------------
+
+Information in how to get started can be found on the wiki at
+https://wiki.bath.ac.uk/display/BalenaHPC/Getting+Started
+
+Dates of up coming training courses can be found at
+http://go.bath.ac.uk/hpc-training
+
+Usage policies and conditions of use can be found on the wiki at
+https://wiki.bath.ac.uk/display/BalenaHPC/Policies
+
+-------------------------------------------------------------------------------
+
+The BeeGFS parallel file system is available under the env variable $SCRATCH
+Your University home area is available under the env variable $BUCSHOME
+
+-------------------------------------------------------------------------------
+Please direct questions and queries to hpc-support@bath.ac.uk  
+[orp20@balena-02 ~]$ ssh itd-ngpu-01
+Last login: Wed Sep 26 13:53:27 2018 from balena-01.cm.balena
+
+=================== Welcome to the Balena ITD service ===================
+
+This is an Interactive Test and Development node and SHOULD NOT
+be used for running any production workloads. Please refer our 
+'Good User' guide for usage policy:-
+
+https://wiki.bath.ac.uk/display/BalenaHPC/Policies#Policies-GoodUserGuide
+
+============================= Thank you =================================
+
+[orp20@itd-ngpu-01 ~]$ ls
+Desktop  intel  jobscript.slurm  scratch
+[orp20@itd-ngpu-01 ~]$ cd scratch/
+firedrake-complex/              firedrake-test.py               jobscript-example.slurm         
+#firedrake-test.py#             firedrake-test.py~              old-helmholtz-code-from-balena/ 
+[orp20@itd-ngpu-01 ~]$ cd scratch/firedrake-complex/
+[orp20@itd-ngpu-01 firedrake-complex]$ ls
+firedrake  firedrake-install  firedrake-install.log  petsc  python3  Python-3.6.5.tgz
+[orp20@itd-ngpu-01 firedrake-complex]$ module purge
+[orp20@itd-ngpu-01 firedrake-complex]$ 
+[orp20@itd-ngpu-01 firedrake-complex]$ # Default modules to load
+[orp20@itd-ngpu-01 firedrake-complex]$ module load git/2.5.1
+[orp20@itd-ngpu-01 firedrake-complex]$ module load intel/mpi/64/18.0.128
+[orp20@itd-ngpu-01 firedrake-complex]$ module load intel/mkl/64/11.3.3
+[orp20@itd-ngpu-01 firedrake-complex]$ module load boost/intel/1.57.0
+[orp20@itd-ngpu-01 firedrake-complex]$ module load htop
+[orp20@itd-ngpu-01 firedrake-complex]$ module load cmake/3.5.2
+[orp20@itd-ngpu-01 firedrake-complex]$ module load intel/compiler/64/18.0.128
+[orp20@itd-ngpu-01 firedrake-complex]$ module load slurm #/16.05.3
+[orp20@itd-ngpu-01 firedrake-complex]$ #module load hdf5/gcc/1.8.17
+[orp20@itd-ngpu-01 firedrake-complex]$ 
+[orp20@itd-ngpu-01 firedrake-complex]$ # Set main to be working directory
+[orp20@itd-ngpu-01 firedrake-complex]$ MAIN=`pwd`
+[orp20@itd-ngpu-01 firedrake-complex]$ 
+[orp20@itd-ngpu-01 firedrake-complex]$ # Load python2
+[orp20@itd-ngpu-01 firedrake-complex]$ module load python/2.7.8
+[orp20@itd-ngpu-01 firedrake-complex]$ export PETSC_ARCH=arch-python-linux-x86_64
+[orp20@itd-ngpu-01 firedrake-complex]$ unset PETSC_DIR
+[orp20@itd-ngpu-01 firedrake-complex]$ cd ./petsc
+[orp20@itd-ngpu-01 petsc]$ make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+Running test examples to verify correct installation
+Using PETSC_DIR=/home/s/orp20/scratch/firedrake-complex/petsc and PETSC_ARCH=arch-python-linux-x86_64
+C/C++ example src/snes/examples/tutorials/ex19 run successfully with 1 MPI process
+Possible error running C/C++ src/snes/examples/tutorials/ex19 with 2 MPI processes
+See http://www.mcs.anl.gov/petsc/documentation/faq.html
+Unknown option: pmi_args
+Usage:
+    mpiexec.slurm args executable pgmargs
+
+    where args are comannd line arguments for mpiexec (see below),
+    executable is the name of the eecutable and pgmargs are command line
+    arguments for the executable. For example the following command will run
+    the MPI progam a.out on 4 processes:
+
+            mpiexec.slurm -n 4 a.out
+
+    mpiexec.slurm supports the following options:
+
+             [-n nprocs]
+             [-host hostname]
+             [-verbose]
+             [-nostdin]
+             [-allstdin]
+             [-nostdout]
+             [-pernode]
+             [-config config_file]
+             [-help|-?]
+             [-man]
+
+srun: Force Terminated job 1651095
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 1651095.0 ON node-sw-015 CANCELLED AT 2018-09-27T10:17:58 DUE TO TIME LIMIT ***
+srun: error: node-sw-015: tasks 0-1: Terminated
+
+
+
+
+^C^C^X^Z
+[1]+  Stopped                 make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+[orp20@itd-ngpu-01 petsc]$ ^C
+[orp20@itd-ngpu-01 petsc]$ ^C
+[orp20@itd-ngpu-01 petsc]$ make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+Running test examples to verify correct installation
+Using PETSC_DIR=/home/s/orp20/scratch/firedrake-complex/petsc and PETSC_ARCH=arch-python-linux-x86_64
+Possible error running C/C++ src/snes/examples/tutorials/ex19 with 1 MPI process
+See http://www.mcs.anl.gov/petsc/documentation/faq.html
+srun: job 1651112 queued and waiting for resources
+srun: job 1651112 has been allocated resources
+lid velocity = 0.0016, prandtl # = 1., grashof # = 1.
+Number of SNES iterations = 2
+Possible error running C/C++ src/snes/examples/tutorials/ex19 with 2 MPI processes
+See http://www.mcs.anl.gov/petsc/documentation/faq.html
+srun: job 1651113 queued and waiting for resources
+srun: job 1651113 has been allocated resources
+Unknown option: pmi_args
+Usage:
+    mpiexec.slurm args executable pgmargs
+
+    where args are comannd line arguments for mpiexec (see below),
+    executable is the name of the eecutable and pgmargs are command line
+    arguments for the executable. For example the following command will run
+    the MPI progam a.out on 4 processes:
+
+            mpiexec.slurm -n 4 a.out
+
+    mpiexec.slurm supports the following options:
+
+             [-n nprocs]
+             [-host hostname]
+             [-verbose]
+             [-nostdin]
+             [-allstdin]
+             [-nostdout]
+             [-pernode]
+             [-config config_file]
+             [-help|-?]
+             [-man]
+
+srun: Force Terminated job 1651113
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 1651113.0 ON node-sw-128 CANCELLED AT 2018-09-27T10:30:29 DUE TO TIME LIMIT ***
+srun: error: node-sw-128: tasks 0-1: Terminated
+1,9c1,30
+< lid velocity = 0.0625, prandtl # = 1., grashof # = 1.
+<   0 SNES Function norm 0.239155 
+<     0 KSP Residual norm 0.239155 
+<     1 KSP Residual norm < 1.e-11
+<   1 SNES Function norm 6.81968e-05 
+<     0 KSP Residual norm 6.81968e-05 
+<     1 KSP Residual norm < 1.e-11
+<   2 SNES Function norm < 1.e-11
+< Number of SNES iterations = 2
+---
+> srun: job 1651119 queued and waiting for resources
+> srun: job 1651119 has been allocated resources
+> Unknown option: pmi_args
+> Usage:
+>     mpiexec.slurm args executable pgmargs
+> 
+>     where args are comannd line arguments for mpiexec (see below),
+>     executable is the name of the eecutable and pgmargs are command line
+>     arguments for the executable. For example the following command will run
+>     the MPI progam a.out on 4 processes:
+> 
+>             mpiexec.slurm -n 4 a.out
+> 
+>     mpiexec.slurm supports the following options:
+> 
+>              [-n nprocs]
+>              [-host hostname]
+>              [-verbose]
+>              [-nostdin]
+>              [-allstdin]
+>              [-nostdout]
+>              [-pernode]
+>              [-config config_file]
+>              [-help|-?]
+>              [-man]
+> 
+> srun: Force Terminated job 1651119
+> srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+> slurmstepd: error: *** STEP 1651119.0 ON node-sw-015 CANCELLED AT 2018-09-27T10:41:02 DUE TO TIME LIMIT ***
+> srun: error: node-sw-015: tasks 0-1: Terminated
+/home/s/orp20/scratch/firedrake-complex/petsc/src/snes/examples/tutorials
+Possible problem with ex19_fieldsplit_fieldsplit_mumps, diffs above
+=========================================
+Completed test examples
+[orp20@itd-ngpu-01 petsc]$ 

@@ -1,3 +1,12 @@
 PETSc options when building in complex:
 
 --download-netcdf --download-pnetcdf --download-mumps --with-fortran-bindings=0 --download-chaco --download-hdf5 --download-parmetis --download-exodusii --with-scalar-type=complex --download-scalapack --download-metis
+
+Jack's options
+
+./configure --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-eigen --with-fortran-bindings=0 --download-chaco --download-metis --download-parmetis --download-scalapack --download-hypre --download-mumps --download-netcdf --download-hdf5 --download-pnetcdf
+
+
+Suggested via media
+
+./configure --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-netcdf --download-pnetcdf --download-mumps --with-fortran-bindings=0 --download-chaco --download-hdf5 --download-parmetis --download-exodusii --with-scalar-type=complex --download-scalapack --download-metis
