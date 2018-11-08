@@ -8,7 +8,7 @@ module load boost/intel/1.57.0
 module load htop
 module load cmake/3.5.2
 module load intel/compiler/64/18.0.128
-module load slurm/16.05.3
+module load slurm
 
 MAIN=$1
 
