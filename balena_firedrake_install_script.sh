@@ -7,6 +7,7 @@
 module purge
 
 # Default modules to load
+module purge
 module load git/2.5.1
 module load intel/mpi/64/18.0.128
 module load intel/mkl/64/11.3.3
@@ -14,7 +15,8 @@ module load boost/intel/1.57.0
 module load htop
 module load cmake/3.5.2
 module load intel/compiler/64/18.0.128
-module load slurm #/16.05.3
+module load slurm
+module load zlib
 #module load hdf5/gcc/1.8.17
 
 # Set main to be working directory
@@ -31,21 +33,24 @@ module load python/2.7.8
 ###
 git clone https://github.com/firedrakeproject/petsc.git
 
+
 export PETSC_ARCH=arch-python-linux-x86_64
 unset PETSC_DIR
 cd ./petsc
 
 # Configure PETSc
 # remove --prefix??
-./configure --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-netcdf --download-pnetcdf --download-mumps --with-fortran-bindings=0 --download-chaco --download-hdf5 --download-parmetis --download-exodusii --with-scalar-type=complex --download-scalapack --download-metis
+./configure --with-zlib-dir=/apps/zlib/1.2.8 --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-eigen --with-fortran-bindings=0 --download-chaco --download-metis --download-parmetis --download-scalapack --download-hypre --download-mumps --download-netcdf --download-hdf5 --download-pnetcdf --download-exodusii --with-scalar-type=complex
 
 # Build PETSc
-make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
+make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
 
 # REMOVE???
 #make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 install
-# CHECK??? - currently this hangs
-make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+
+# CHECK???
+make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+
 #make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 streams # This checks the scaling and is optional
 
 
@@ -97,7 +102,7 @@ module unload python/2.7.8
 
 export INTEL_LICENSE_FILE=/cm/shared/licenses/intel/
 ### This line doesn't work, python3 complains about not being able to find encodings module, but then runs fine in terminal after
-python3 firedrake-install --mpicc=mpiicc --mpicxx=mpiicpc --mpif90=mpiifort --no-package-manager --disable-ssh --honour-petsc-dir --complex --package-branch firedrake complex --package-branch tsfc complex --package-branch ufl complex --package-branch firedrake complex --package-branch COFFEE complex --package-branch PyOP2 complex
+python3 firedrake-install --mpicc=mpiicc --mpicxx=mpiicpc --mpif90=mpiifort --no-package-manager --disable-ssh --honour-petsc-dir
 
 # Add paths to .bashrc (only do this once!)
 # echo PETSC_DIR=${MAIN}/petsc >> ~/.bashrc
