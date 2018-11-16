@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 ###
 # Setup
@@ -35,8 +35,7 @@ unset PETSC_DIR
 cd ./petsc
 
 # Configure PETSc
-# remove --prefix??
-./configure --with-zlib-dir=/apps/zlib/1.2.8 --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-eigen --with-fortran-bindings=0 --download-chaco --download-metis --download-parmetis --download-scalapack --download-hypre --download-mumps --download-netcdf --download-hdf5 --download-pnetcdf --download-exodusii --with-scalar-type=complex
+./configure --with-fortran-bindings=0 --download-hdf5 --with-scalar-type=complex --download-exodusii --with-zlib-dir=/apps/zlib/1.2.8 --download-metis --download-netcdf --download-parmetis --download-chaco --download-pnetcdf --download-mumps --download-scalapack --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --with-shared-libraries=1 --download-fblaslapack=1
 
 # Build PETSc
 make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
