@@ -10,7 +10,7 @@ module load cmake/3.5.2
 module load intel/compiler/64/18.0.128
 module load slurm
 
-MAIN=$1
+MAIN=/home/s/orp20/scratch/firedrake
 
 export PETSC_ARCH=arch-python-linux-x86_64
 export PETSC_DIR=${MAIN}/petsc
