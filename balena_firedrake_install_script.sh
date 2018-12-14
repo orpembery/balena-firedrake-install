@@ -18,6 +18,7 @@ module load intel/compiler/64/18.0.128
 module load slurm
 module load zlib
 
+
 # Set main to be working directory
 MAIN=`pwd`
 
@@ -36,6 +37,7 @@ cd ./petsc
 
 # Configure PETSc
 ./configure --with-fortran-bindings=0 --download-hdf5 --with-scalar-type=complex --download-exodusii --with-zlib-dir=/apps/zlib/1.2.8 --download-metis --download-netcdf --download-parmetis --download-chaco --download-pnetcdf --download-mumps --download-scalapack --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --with-shared-libraries=1 --download-fblaslapack=1
+
 
 # Build PETSc
 make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
@@ -89,3 +91,4 @@ module unload python/2.7.8
 export INTEL_LICENSE_FILE=/cm/shared/licenses/intel/
 
 python3 firedrake-install --complex --package-branch firedrake complex --mpicc=mpiicc --mpicxx=mpiicpc --mpif90=mpiifort --no-package-manager --disable-ssh --honour-petsc-dir
+

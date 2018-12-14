@@ -2,7 +2,7 @@
 
 This repository provides scripts to install and run Firedrake on Balena.
 
-Currently, only the master branch of firedrake is supported.
+The master branch of this repository provides scripts for the master branch of Firedrake, the complex branch of this repository provides the same scripts for complex Firedrake.
 
 To install firedrake, run (in an appropriate folder) `balena_firedrake_install_script.sh`.
 
