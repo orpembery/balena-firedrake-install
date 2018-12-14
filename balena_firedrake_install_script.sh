@@ -1,5 +1,7 @@
 !/bin/bash
 
+# Script by Jack Betteridge, modified a little by Roshan Mathew and Owen Pembery
+
 ###
 # Setup
 ###
