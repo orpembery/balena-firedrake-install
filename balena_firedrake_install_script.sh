@@ -5,6 +5,7 @@
 ###
 
 # Default modules to load
+module purge
 module load git/2.5.1
 module load intel/mpi/64/18.0.128
 module load intel/mkl/64/11.3.3
@@ -12,7 +13,8 @@ module load boost/intel/1.57.0
 module load htop
 module load cmake/3.5.2
 module load intel/compiler/64/18.0.128
-module load slurm #/16.05.3
+module load slurm
+module load zlib
 #module load hdf5/gcc/1.8.17
 
 # Set main to be working directory
@@ -26,6 +28,7 @@ module load python/2.7.8
 ###
 git clone https://github.com/firedrakeproject/petsc.git
 
+
 export PETSC_ARCH=arch-python-linux-x86_64
 unset PETSC_DIR
 cd ./petsc
@@ -33,15 +36,15 @@ cd ./petsc
 # Configure PETSc
 # remove --prefix??
 # Last two options weren't in Jack's script, but were passed by the complex install script
-./configure --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-eigen --with-fortran-bindings=0 --download-chaco --download-metis --download-parmetis --download-scalapack --download-hypre --download-mumps --download-netcdf --download-hdf5 --download-pnetcdf # --download-exodusii --with-scalar-type=complex
+./configure --with-zlib-dir=/apps/zlib/1.2.8 --with-shared-libraries=1 --with-debugging=0 --with-c2html=0 --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort --download-fblaslapack --download-eigen --with-fortran-bindings=0 --download-chaco --download-metis --download-parmetis --download-scalapack --download-hypre --download-mumps --download-netcdf --download-hdf5 --download-pnetcdf # --download-exodusii --with-scalar-type=complex
 
 # Build PETSc
-make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
+make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 all
 
 # REMOVE???
 #make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 install
 # CHECK???
-make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
+make -j 16 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 check
 #make -j 17 PETSC_DIR=${MAIN}/petsc PETSC_ARCH=arch-python-linux-x86_64 streams # This checks the scaling and is optional
 
 
