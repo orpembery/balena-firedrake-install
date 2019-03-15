@@ -1,3 +1,19 @@
 PETSc options when building in complex:
 
 --download-netcdf --download-pnetcdf --download-mumps --with-fortran-bindings=0 --download-chaco --download-hdf5 --download-parmetis --download-exodusii --with-scalar-type=complex --download-scalapack --download-metis
+
+
+
+What Firedrake needs if installed without a package manager:
+
+If this is not the case, please install the following and try again:
+* A C and C++ compiler (for example gcc/g++ or clang), GNU make
+* A Fortran compiler (for PETSc)
+* MPI
+* Blas and Lapack
+* Git, Mercurial
+* Python version >=3.5
+* The Python headers
+* autoconf, automake, libtool
+* CMake
+* zlib
