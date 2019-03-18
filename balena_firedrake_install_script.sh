@@ -58,6 +58,11 @@ unset PYTHON_DIR
 export PYTHON_DIR=${MAIN}/python3
 cd ./python3
 
+# Configure
+./configure --enable-shared --enable-ipv6 --with-ensurepip=yes --prefix=${PYTHON_DIR} CPPFLAGS=-I${PYTHON_DIR}/include LDFLAGS="-L${PYTHON_DIR}/lib -Wl,-rpath=${PYTHON_DIR}/lib,--no-as-needed" CFLAGS="-Wformat -Wformat-security -D_FORTIFY_SOURCE=2 -fstack-protector -O3 -fpic -fPIC" PKG_CONFIG_PATH=${PYTHON_DIR}/lib/pkgconfig --enable-optimizations
+
+
+
 # Build Python3
 make -j 17
 make -j 17 install
