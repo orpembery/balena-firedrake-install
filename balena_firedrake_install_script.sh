@@ -15,7 +15,7 @@ module load intel/compiler/64/18.0.128
 module load slurm/17.11.7
 #module load hdf5/gcc/1.8.17
 
-# Set main to be working directory
+# Set main to be scratch
 MAIN=`pwd`
 
 # Load python2
@@ -98,9 +98,9 @@ export MPIF90=mpiifort
 export INTEL_LICENSE_FILE=/cm/shared/licenses/intel/
 ### This line doesn't work, python3 complains about not being able to find encodings module, but then runs fine in terminal after
 
-export CPATH=$CPATH:/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/include
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/lib
-export LDFLAGS=-L/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/lib
+export CPATH=$CPATH:$MAIN/petsc/arch-python-linux-x86_64/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MAIN/petsc/arch-python-linux-x86_64/lib
+export LDFLAGS=-L$MAIN/petsc/arch-python-linux-x86_64/lib
 
 python3 -i firedrake-install --mpicc=mpiicc --mpicxx=mpiicpc --mpif90=mpiifort --no-package-manager --disable-ssh --honour-petsc-dir
 

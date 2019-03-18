@@ -10,7 +10,8 @@ module load cmake/3.5.2
 module load intel/compiler/64/18.0.128
 module load slurm/17.11.7
 
-MAIN=/home/a/jdb55/scratch/firedrake-files
+# Need to set MAIN - should be the directory in which you installed Firedrake with the install script
+MAIN=
 
 export PETSC_ARCH=arch-python-linux-x86_64
 export PETSC_DIR=${MAIN}/petsc
@@ -20,15 +21,15 @@ export PATH="${PYTHON_DIR}/bin:$PATH"
 export MPICC=mpiicc
 export MPICXX=mpiicpc
 export MPIF90=mpiifort
-# Intel can never find it's licence
+# Intel can never find its licence
 export INTEL_LICENSE_FILE=/cm/shared/licenses/intel/
 # Having I_MPI_FABRICS=shm:tmi breaks things
 unset I_MPI_FABRICS
 
 # Maybe req'd???
-export CPATH=$CPATH:/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/include
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/lib
-export LDFLAGS=-L/beegfs/scratch/user/a/jdb55/firedrake-files/petsc/arch-python-linux-x86_64/lib
+export CPATH=$CPATH:$MAIN/petsc/arch-python-linux-x86_64/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MAIN/petsc/arch-python-linux-x86_64/lib
+export LDFLAGS=-L$MAIN/petsc/arch-python-linux-x86_64/lib
 
 # Possibly needed on itd nodes
 #unset "${!SLURM@}"
