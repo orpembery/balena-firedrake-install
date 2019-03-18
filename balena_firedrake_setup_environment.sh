@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Default modules to load
+module purge
 module load git/2.5.1
 module load intel/mpi/64/18.0.128
 module load intel/mkl/64/11.3.3
