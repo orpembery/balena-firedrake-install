@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script by Jack Betteridge, modified a little by Roshan Mathew and Owen Pembery
+
 # Default modules to load
 module purge
 module load git/2.5.1
